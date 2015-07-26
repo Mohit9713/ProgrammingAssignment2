@@ -13,7 +13,9 @@ makeCacheMatrix <- function(x = matrix()) {
         SetMatrix <- function(NewMatrix) {
                 x <<- NewMatrix
                 ## Invalidate the cached Inverse since the matrix could have 
-                ## changed
+                ## changed. A future improvement could be to check if the new matrix
+                ## is actually different from the stored one and only then
+                ## invalidate the cache
                 CachedMatrixInverse <<- NULL
         }
         
@@ -29,7 +31,7 @@ makeCacheMatrix <- function(x = matrix()) {
         
         ## Return a list of functions to store and retrieve the matrix and its 
         ## cached inverse 
-        list(set = SetMatrix, get = GeMatrix,
+        list(set = SetMatrix, get = GetMatrix,
              setinverse = SetInverse,
              getinverse = GetInverse)
 
